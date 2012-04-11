@@ -8,7 +8,8 @@ Spree::Variant.class_eval do
     { 
       :id    => self.id, 
       :count => self.count_on_hand, 
-      :price => number_to_currency(actual_price)
+      :price => number_to_currency(actual_price),
+      :image_id => self.images.first.try(:id)
     }
   end
     

@@ -160,6 +160,11 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
       } else {
         $('#product-price .price').html('<span class="price from">' + prices[0] + '</span> - <span class="price to">' + prices[prices.length - 1] + '</span>');
       }
+       var image_ids = []
+      $.each(variants, function(key, value) { image_ids.push(value.image_id) });
+      if (image_ids.length > 0) {
+        select_image(image_ids[0]);
+      }
       return false;
     }
   }
@@ -173,7 +178,8 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
        }   
       $('form[data-form-type="variant"] button[type=submit]').attr('disabled', false).fadeTo(100, 1);
       try {
-        show_variant_images(variant.id);
+        //show_variant_images(variant.id);
+        select_image(variant.image_id);
       } catch(error) {
         // depends on modified version of product.js
       }
@@ -184,7 +190,7 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
       // Replace product price by "(select)" only when there are at least 1 variant not out-of-stock
       variants = $("div.variant-options.index-0")
       if (variants.find("a.option-value.out-of-stock").length != variants.find("a.option-value").length)
-        price.text('(select)');
+        price.text('(wybierz wariant)');
     }
   }
 
@@ -197,7 +203,7 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
       disable($(element).find('a.option-value').show().removeClass('in-stock out-of-stock').addClass('locked').unbind('click'));
       $(element).find('a.clear-button').hide();
     });
-    show_all_variant_images();
+    //show_all_variant_images();
   }
 
 
