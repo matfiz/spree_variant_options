@@ -1,7 +1,14 @@
 <tr class="option_value fields" id="<%= dom_id(f.object) %>"  data-hook="option_value">
   <td class="name"><span class="handle"></span> <%= f.text_field :name %></td>
   <td class="presentation"><%= f.text_field :presentation %></td>
-  <td><%= image_tag f.object.image.url(:small) if f.object.has_image? %></td>
+  <td>
+    <% if f.object.has_image? %>
+      <%= image_tag(f.object.image.url(:small)) %>
+    <% elsif f.object.hex_color? %>
+      <div style="height:25px;width:25px;background-color:<%= f.object.formatted_hex_color %>;"></div>
+    <% end %>
+  </td>
   <td><%= f.file_field :image %></td>
+  <td><%= f.text_field :hex_color, :size => 10 %></td>
   <td class="actions"><%= link_to_remove_fields t(:remove), f %></td>
 </tr>
