@@ -101,6 +101,7 @@ Contributors
 * Dan Morin ([@danmorin](https://github.com/danmorin))
 * Richard Brown ([@rbrown](https://github.com/rbrown))
 * [@baracek](https://github.com/baracek)
+* Greg Brzezinka ([@grzesiub](https://github.com/grzesiub))
 
 If you'd like to help out feel free to fork and send me pull requests!
 
