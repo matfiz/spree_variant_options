@@ -1,7 +1,4 @@
 var add_image_handlers = function() {
-  $("#main-image").data('selectedThumb', $('#main-image img').attr('src'));
-  $('ul.thumbnails li').eq(0).addClass('selected');
-
   $('ul.thumbnails').delegate('a', 'click', function(event) {
     var newImg = $(event.currentTarget).attr('href');
     var image_id = $(event.currentTarget).parent().attr('id').replace(/[^\d]*/,'');
@@ -32,9 +29,11 @@ var add_image_handlers = function() {
     var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
     var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
     getMovie("main-image").reloadContent(imgName,imgPath,image_id);    
-      
     $('#main-image img').attr('src', $("#main-image").data('selectedThumb'));
   });
+  
+  //open first thumb on init
+  $('ul.thumbnails li').eq(0).addClass('selected');
 };
 
 var show_variant_images = function(variant_id) {
@@ -94,3 +93,20 @@ function getMovie(movieName) {
         return document[movieName];
     }
 }
+
+function getObjectById(objectIdStr) {
+        var r = null;
+        var o = getElementById(objectIdStr);
+        if (o && o.nodeName == "OBJECT") {
+            if (typeof o.SetVariable != UNDEF) {
+                r = o;
+            }
+            else {
+                var n = o.getElementsByTagName(OBJECT)[0];
+                if (n) {
+                    r = n;
+                }
+            }
+        }
+        return r;
+    }

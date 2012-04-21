@@ -47,7 +47,15 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
     toggle();
     $('.clear-option a.clear-button').hide().click(handle_clear);
     //init zoomer
-    swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "550", "250", "11.2.202","expressInstall.swf",{path_:"/assets/swfs/null/large", img_:"noimage.jpg", id_:"1"});
+    var init_img = $('#product-thumbnails').find('li').first().find("a");
+    var newImg = init_img.attr('href');
+    var image_id = init_img.parent().attr('id').replace(/[^\d]*/,'');
+    var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
+    var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
+    $("#product-images").data('selectedThumb', init_img.attr('href'));
+    $("#product-images").data('selectedThumbId', init_img.parent().attr('id'));
+    swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "550", "250", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
+
   }
 
   function get_index(parent) {
