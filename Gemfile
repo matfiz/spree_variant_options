@@ -1,4 +1,8 @@
 source "http://rubygems.org"
-gem "swfobject-rails"
 
 gemspec
+
+gem "swfobject-rails"
+#gem 'coffee-rails', '~> 3.2.1'
+
+
