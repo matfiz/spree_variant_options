@@ -6,6 +6,16 @@ Spree::Core::Engine.routes.append do
         post :update_positions
       end
     end
+    resources :products do
+      resources :images do
+        get :zoomer, :on => :member
+        post :read_data
+        get :read_data
+        post :write_data
+        get :write_data
+        post :destroy_data
+      end
+    end
   end
   
   resources :products do
