@@ -8,4 +8,9 @@ Spree::Core::Engine.routes.append do
     end
   end
   
+  resources :products do
+    post 'images_data/:thumb_id', :on => :member, :action => 'images_data'
+    get 'images_data/:thumb_id', :on => :member, :action => 'images_data'
+  end
+  
 end
