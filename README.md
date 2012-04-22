@@ -2,6 +2,7 @@
 What does this fork changes?
 ------------------------------------------------------------------------------
 This fork was made to adjust the gem for motociclisti.pl e-commerce shop. The extension was enriched with a zoomer functionality designed by Mariusz Henn.
+If you are interested to use it on your site and you want to know more details about passing the necessary parameters, please contact me, I will be happy to help you: Greg Brzezinka ([@grzesiub](https://github.com/grzesiub))
 
 # Spree Variant Options [![Build Status](https://secure.travis-ci.org/citrus/spree_variant_options.png)](http://travis-ci.org/citrus/spree_variant_options)
 
