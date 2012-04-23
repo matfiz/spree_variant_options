@@ -22,7 +22,7 @@ module Spree
       def write_data
         @product = Spree::Product.find_by_permalink!(params[:product_id])
         @image = Spree::Image.find(params[:image_id])
-        @image_data = Spree::ImageData.new(:spree_product_id => @product.id).where(:spree_asset_id => @image.id)
+        @image_data = Spree::ImageData.new(:spree_product_id => @product.id,:spree_asset_id => @image.id)
         x = params[:x] if params[:x].present?
         y = params[:y] if params[:y].present?
         desc = params[:desc] if params[:desc].present?
