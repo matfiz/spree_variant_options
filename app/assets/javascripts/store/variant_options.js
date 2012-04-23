@@ -54,7 +54,7 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
     var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
     $("#product-images").data('selectedThumb', init_img.attr('href'));
     $("#product-images").data('selectedThumbId', init_img.parent().attr('id'));
-    swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "550", "250", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
+    swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
 
   }
 
