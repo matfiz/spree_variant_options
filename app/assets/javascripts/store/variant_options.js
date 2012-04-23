@@ -48,7 +48,6 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
     $('.clear-option a.clear-button').hide().click(handle_clear);
     //init zoomer
     if ($('#thumbnails').find('img').length == 0) {
-        console.log("cos");
         var orig_path = $('#main-image').find("img").attr("src");
         var imgName = orig_path.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
         var imgPath = orig_path.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
@@ -254,3 +253,14 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
   $(document).ready(init);
 
 };
+
+//if there are no variants, show product image only
+jQuery(document).ready(function(){
+    if (window.location.href.match(/\/products\/\w/) != null && $('#thumbnails').find('img').length == 0) {
+        var orig_path = $('#main-image').find("img").attr("src");
+        var imgName = orig_path.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
+        var imgPath = orig_path.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
+        var image_id = orig_path.replace(/\/\w*\/\w*.\w{3}\?\d*$/,'').replace(/\/spree\/products\//,'');
+        swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
+    }
+});
