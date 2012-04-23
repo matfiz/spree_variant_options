@@ -47,15 +47,27 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
     toggle();
     $('.clear-option a.clear-button').hide().click(handle_clear);
     //init zoomer
-    var init_img = $('#product-thumbnails').find('li').first().find("a");
-    var newImg = init_img.attr('href');
-    var image_id = init_img.parent().attr('id').replace(/[^\d]*/,'');
-    var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
-    var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
-    $("#product-images").data('selectedThumb', init_img.attr('href'));
-    $("#product-images").data('selectedThumbId', init_img.parent().attr('id'));
-    swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
-
+    if ($('#thumbnails').find('img').length == 0) {
+        console.log("cos");
+        var orig_path = $('#main-image').find("img").attr("src");
+        var imgName = orig_path.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
+        var imgPath = orig_path.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
+        var image_id = orig_path.replace(/\/\w*\/\w*.\w{3}\?\d*$/,'').replace(/\/spree\/products\//,'');
+        $("#product-images").data('selectedThumb', init_img.attr('href'));
+        $("#product-images").data('selectedThumbId', init_img.parent().attr('id'));
+        swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
+    }
+    else
+    {
+        var init_img = $('#product-thumbnails').find('li').first().find("a");
+        var newImg = init_img.attr('href');
+        var image_id = init_img.parent().attr('id').replace(/[^\d]*/,'');
+        var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
+        var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
+        $("#product-images").data('selectedThumb', init_img.attr('href'));
+        $("#product-images").data('selectedThumbId', init_img.parent().attr('id'));
+        swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
+    }
   }
 
   function get_index(parent) {
