@@ -46,14 +46,15 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
     enable(parent.find('a.option-value'));
     toggle();
     $('.clear-option a.clear-button').hide().click(handle_clear);
+    //show only 3 variant images
+    //show_only_n_variant_images($('li.vtmb').first().attr('id').replace(/[^\d]*/,''),3);
+    $("li.vtmb").hide();
     //init zoomer
     if ($('#thumbnails').find('img').length == 0) {
         var orig_path = $('#main-image').find("img").attr("src");
         var imgName = orig_path.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
         var imgPath = orig_path.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
         var image_id = orig_path.replace(/\/\w*\/\w*.\w{3}\?\d*$/,'').replace(/\/spree\/products\//,'');
-        $("#product-images").data('selectedThumb', init_img.attr('href'));
-        $("#product-images").data('selectedThumbId', init_img.parent().attr('id'));
         swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
     }
     else
@@ -185,6 +186,7 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
       $.each(variants, function(key, value) { image_ids.push(value.image_id) });
       if (image_ids.length > 0) {
         select_image(image_ids[0]);
+        show_selected_img(image_ids);
       }
       return false;
     }
@@ -201,6 +203,7 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
       try {
         //show_variant_images(variant.id);
         select_image(variant.image_id);
+        show_only_n_variant_images(variant.image_id,5);
       } catch(error) {
         // depends on modified version of product.js
       }
@@ -256,11 +259,22 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
 
 //if there are no variants, show product image only
 jQuery(document).ready(function(){
-    if (window.location.href.match(/\/products\/\w/) != null && $('#thumbnails').find('img').length == 0) {
+    if (window.location.href.match(/\/products\/\w/) != null && ($('#thumbnails').find('img').length == 0 || $(".vtmb").length == 0)) {
         var orig_path = $('#main-image').find("img").attr("src");
         var imgName = orig_path.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
         var imgPath = orig_path.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
         var image_id = orig_path.replace(/\/\w*\/\w*.\w{3}\?\d*$/,'').replace(/\/spree\/products\//,'');
         swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
+    }
+    if ($(".vtmb").length == 0) {
+        $("#product-thumbnails").find("a").click(function(){
+            var image_id = $(this).parent().attr("id").replace(/tmb-/,'');
+            try {
+                select_image(parseInt(image_id));
+            } catch(error) {
+                // depends on modified version of product.js
+            }
+            return false;
+        });
     }
 });

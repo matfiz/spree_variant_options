@@ -37,7 +37,6 @@ var add_image_handlers = function() {
 };
 
 var show_variant_images = function(variant_id) {
-    console.log("click!");
   $('li.vtmb').hide();
   $('li.vtmb-' + variant_id).show();
   var currentThumb = $('#' + $("#main-image").data('selectedThumbId'));
@@ -84,13 +83,25 @@ var show_all_variant_images = function() {
   $('li.vtmb').show();
 }
 
-function getMovie(movieName) {
-    if (navigator.appName.indexOf("Microsoft") != -1) {
-        return window[movieName];
-    } else {
-        return document[movieName];
+var show_only_n_variant_images = function(variant,n) {
+  var img = $("#tmb-" + variant)
+  $('li.vtmb').hide();
+  var current_img = img;
+  var variant_imgs = $('li.vtmb');
+  for (i=1;i<=n;i++) {
+    current_img.show()
+    current_img = current_img.siblings('li.vtmb').first();
+  }
+}
+
+var show_selected_img = function(img_ids){
+    $("#product-thumbnails").find("li").hide();
+    for (i=0;i<=img_ids.length-1;i++){
+        $("#tmb-"+img_ids[i]).fadeIn();
     }
 }
+
+
 
 function getObjectById(objectIdStr) {
         var r = null;
