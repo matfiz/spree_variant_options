@@ -186,7 +186,7 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
       $.each(variants, function(key, value) { image_ids.push(value.image_id) });
       if (image_ids.length > 0) {
         select_image(image_ids[0]);
-        show_selected_img(image_ids);
+        show_selected_img(image_ids);//shows only images of current variant
       }
       return false;
     }
@@ -227,7 +227,7 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
       disable($(element).find('a.option-value').show().removeClass('in-stock out-of-stock').addClass('locked').unbind('click'));
       $(element).find('a.clear-button').hide();
     });
-    //show_all_variant_images();
+    show_all_variant_images();
   }
 
 
