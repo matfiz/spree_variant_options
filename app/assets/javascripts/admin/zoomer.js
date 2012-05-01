@@ -1,5 +1,5 @@
 jQuery(document).ready(function($){
-   if (window.location.href.match(/\w*zoomer/).length > 0) {
+   if (window.location.href.match(/\w*zoomer/) != null) {
      var newImg = $("#image_location").data("imageSmall");
      var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
      var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
