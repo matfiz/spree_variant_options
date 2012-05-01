@@ -3,7 +3,7 @@ module Spree
     ImagesController.class_eval do
       def zoomer
         @product = Spree::Product.find_by_permalink!(params[:product_id])
-        @image = Spree::Image.find(params[:image_id])
+        @image = Spree::Image.find(params[:image_id]) if params[:image_id]
       end
       
       def read_data

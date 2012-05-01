@@ -3,7 +3,8 @@
 %h2 Edycja opisów na zdjęciu produktu/wariantu
 %p.small
   Tu będzie opis działania zoomera
-%p
-  = link_to image_tag(@image.attachment.url(:small)), @image.attachment.url(:large)
+%div{:data => {:"image-small" => "#{@image.attachment.url(:small)}", :"image-id" => "#{@image.id}" }, :id => "image_location"}
+  =# link_to image_tag(@image.attachment.url(:small)), @image.attachment.url(:large)
+%div#zoomer_placehoder
 %p.form-buttons{"data-hook" => "buttons"}
-  = link_to t(:cancel), admin_product_images_url(@product), :id => 'cancel_link'
+  = button_link_to "OK", admin_product_images_url(@product), :id => 'cancel_link'
