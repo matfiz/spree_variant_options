@@ -1,4 +1,6 @@
 Spree::OptionValue.class_eval do
+  
+  attr_accessible :hex_color, :image
 
   default_scope order("#{quoted_table_name}.position")
   validates :hex_color, :length => { :is => 6, :allow_blank => true }
