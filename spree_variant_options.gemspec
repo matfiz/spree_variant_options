@@ -20,7 +20,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
   
   # Runtime
-  s.add_dependency('spree_core', '~> 1.0')
+  s.add_dependency('spree_core', '~> 1.1.1')
   s.add_dependency('swfobject-rails')
   
   # Development

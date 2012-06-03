@@ -86,7 +86,7 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
   }
 
   function enable(btns) {
-     bt = btns.not('.unavailable').removeClass('locked').unbind('click')
+     bt = btns.not('.unavailable').removeClass('locked').unbind('click');
      if (!allow_select_outofstock) {
       bt = bt.filter('.in-stock')
      }
@@ -238,6 +238,7 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
 
   function handle_click(evt) {
     evt.preventDefault();
+    console.log("click!");
     variant = null;
     selection = [];
     var a = $(this);
@@ -251,6 +252,7 @@ function VariantOptions(options, allow_backorders, allow_select_outofstock) {
     if (find_variant()) {
       toggle();
     }
+    return false;
   }
 
   $(document).ready(init);
