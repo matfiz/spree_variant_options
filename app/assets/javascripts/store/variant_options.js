@@ -35,6 +35,7 @@ function VariantOptions(params) {
   var options = params['options'];
   var allow_backorders = !params['track_inventory_levels'] ||  params['allow_backorders'];
   var allow_select_outofstock = params['allow_select_outofstock'];
+  var default_instock = params['default_instock'];
 
   var variant, divs, parent, index = 0;
   var selection = [];
@@ -47,6 +48,11 @@ function VariantOptions(params) {
     enable(parent.find('a.option-value'));
     toggle();
     $('.clear-option a.clear-button').hide().click(handle_clear);
+    if (default_instock) {
+      divs.each(function(){
+        $(this).find("ul.variant-option-values li a.in-stock:first").click();
+      });
+    }
     //show only 3 variant images
     //show_only_n_variant_images($('li.vtmb').first().attr('id').replace(/[^\d]*/,''),3);
     $("li.vtmb").hide();
