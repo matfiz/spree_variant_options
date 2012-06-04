@@ -1,6 +1,6 @@
 <% if @product.has_variants? %>
   <div id="product-variants">
-    <h2><%= t('variants') %></h2>
+    <h2><%= t('variants') %>bleble</h2>
     <% index = 0 %>
     <% @product.grouped_option_values.each do |type, values| %>
       <div id="<%= spree_dom_id(type) %>" class="variant-options index-<%= index %>">
@@ -28,6 +28,7 @@
         allow_backorders: <%==  !!Spree::Config[:allow_backorders] -%>,
         allow_select_outofstock: <%== !!SpreeVariantOptions::VariantConfig[:allow_select_outofstock] -%>,
         default_instock: <%== !!SpreeVariantOptions::VariantConfig[:default_instock] -%>});
+        console.log("variants");
     //]]>
     </script>    
   </div>

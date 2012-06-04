@@ -245,7 +245,6 @@ function VariantOptions(params) {
 
   function handle_click(evt) {
     evt.preventDefault();
-    console.log("click!");
     variant = null;
     selection = [];
     var a = $(this);
