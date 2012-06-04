@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   # Runtime
   s.add_dependency('spree_core', '~> 1.1.1')
   s.add_dependency('swfobject-rails')
+  s.add_dependency('haml')
   
   # Development
   s.add_development_dependency('spree_sample',     '~> 1.0')

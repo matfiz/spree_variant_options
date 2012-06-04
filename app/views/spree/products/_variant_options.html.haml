@@ -1,0 +1,92 @@
+- if @product.has_variants?
+  %div#product-variants
+    - index = 0
+    - @product.grouped_option_values.each do |type, values|
+      - if (/.*[Kk]olor.*/.match(type.presentation).present?)
+        %h1{:class => "index-#{index}"} oś
+        %div{:class => "variant-options index-#{index}", :id => "#{dom_id(type)}"}
+          %h6.variant-option-type dostępne kolory
+          %ul.variant-option-values.table-kolory
+            - values.sort_by(&:position).each do |value|
+              - classes = ["option-value"]
+              - unless (variants = @product.variants_for_option_value(value)).empty?
+                - if Spree::Config[:allow_backorders] || variants.sum(&:count_on_hand) > 0
+                  - classes << "in-stock" 
+                - else
+                  - classes << "out-of-stock"
+                %li
+                  //= link_to value.has_image? ? image_tag(value.image.url, :alt => value.presentation) : content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}"
+                  = link_to "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}" do
+                    - if value.has_image?
+                      = image_tag(value.image.url, :alt => value.presentation)
+                    - elsif value.hex_color?
+                      <div style="height:100%;width:100%;background-color:<%= value.formatted_hex_color %>;"></div>
+                    - else
+                      = content_tag(:span, value.presentation)
+            %li.clear-option= link_to "X", "#clear", :class => "clear-button clear-index-#{index}"
+            %li.clear
+        - index += 1
+      - elsif (/.*[rR]ozmiar.*/.match(type.presentation).present?)
+        %div{:id => "#{dom_id(type)}", :class => "variant-options index-#{index}"}
+          %h6.variant-option-type dostępne rozmiary
+          %ul.variant-option-values.table-rozmiary
+            - values.sort_by(&:position).each do |value|
+              - classes = ["option-value"]
+              - unless (variants = @product.variants_for_option_value(value)).empty?
+                - if Spree::Config[:allow_backorders] || variants.sum(&:count_on_hand) > 0
+                  - classes << "in-stock" 
+                - else
+                  - classes << "out-of-stock"
+                %li= link_to content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}"
+            %li.clear-option= link_to "X", "#clear", :class => "clear-button clear-index-#{index}"
+            %li.clear
+        - index += 1
+      - else
+        %div{:id => "#{dom_id(type)}", :class => "variant-options index-#{index}"}
+          %h6.variant-option-type= type.presentation
+          %ul.variant-option-values
+            - values.sort_by(&:position).each do |value|
+              - classes = ["option-value"]
+              - unless (variants = @product.variants_for_option_value(value)).empty?
+                - classes << ( Spree::Config[:allow_backorders] || variants.sum(&:count_on_hand) > 0 ? "in-stock" : "out-of-stock" ) if index == 0 
+                - cl = (value.has_image? ? " " : "noimage")
+                %li{:class => cl}
+                  = link_to value.has_image? ? image_tag(value.image.url, :alt => value.presentation) : content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}"
+            %li.clear-option= link_to "X", "#clear", :class => "clear-button clear-index-#{index}"
+            %li.clear
+        - index += 1
+    = hidden_field_tag "products[#{@product.id}]", "", :id => "variant_id", :class => "hidden"
+    %div{:id => "availability", :class => "variant-options"}
+      %h6.variant-option-type= "stan magazynu"
+      %ul.variant-option-values
+        %li
+          - if Spree::Config[:allow_backorders] || @product.variants.sum(&:count_on_hand) > 0
+            dostępne
+          - else
+            chwilowy brak
+      
+:javascript
+    var variant_options = new VariantOptions({
+        options: #{@product.variant_options_hash.to_json},
+        track_inventory_levels: #{!!Spree::Config[:track_inventory_levels]},
+        allow_backorders: #{!!Spree::Config[:allow_backorders]},
+        allow_select_outofstock: #{!!SpreeVariantOptions::VariantConfig[:allow_select_outofstock]},
+        default_instock: #{!!SpreeVariantOptions::VariantConfig[:default_instock]}});
+    jQuery(document).ready(function($){
+      var kolor = "#aaa";
+      $(".table-kolory").find("li").each(function(){
+        //kolor = $(this).find("a").html();
+        //$(this).css("background", kolor).css("color", kolor).find("a").html("  ");
+        $(this).click(function(e){
+          //$(this).find("a").trigger("click");
+          e.stopPropagation();
+          $(this).hover(function(){
+              $(this).css('cursor','pointer')
+            },function(){
+              $(this).css('cursor','default')
+            });
+          
+        })
+      })
+    })
+    
