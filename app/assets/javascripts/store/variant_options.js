@@ -176,7 +176,7 @@ function VariantOptions(params) {
   function find_variant() {
     var selected = divs.find('a.selected');
     var variants = get_variant_objects(selected.get(0).rel);
-    if (selected.length == divs.length) {
+    if (selected.length == divs.length - 1) {
       return variant = variants[selection[0]];
     } else {
       var prices = [];
