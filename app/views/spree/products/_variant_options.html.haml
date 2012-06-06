@@ -27,7 +27,7 @@
             %li.clear
         - index += 1
       - elsif (/.*[rR]ozmiar.*/.match(type.presentation).present?)
-          %h6.variant-option-type dostępne rozmiary
+        %h6.variant-option-type dostępne rozmiary
         %div{:id => "#{dom_id(type)}", :class => "variant-options index-#{index}"}
           %ul.variant-option-values.table-rozmiary
             - values.sort_by(&:position).each do |value|

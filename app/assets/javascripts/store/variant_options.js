@@ -62,7 +62,7 @@ function VariantOptions(params) {
         var imgName = orig_path.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
         var imgPath = orig_path.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
         var image_id = orig_path.replace(/\/\w*\/\w*.\w{3}\?\d*$/,'').replace(/\/spree\/products\//,'');
-        swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id},{wmode:"opaque"});
+        swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","/assets/swfs//assets/swfs/expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id},{wmode:"opaque"});
     }
     else
     {
@@ -73,7 +73,7 @@ function VariantOptions(params) {
         var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
         $("#product-images").data('selectedThumb', init_img.attr('href'));
         $("#product-images").data('selectedThumbId', init_img.parent().attr('id'));
-        swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id},{wmode:"opaque"});
+        swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","/assets/swfs/expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id},{wmode:"opaque"});
     }
   }
 
@@ -272,7 +272,7 @@ jQuery(document).ready(function(){
         var imgName = orig_path.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
         var imgPath = orig_path.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
         var image_id = orig_path.replace(/\/\w*\/\w*.\w{3}\?\d*$/,'').replace(/\/spree\/products\//,'');
-        swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
+        swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","/assets/swfs/expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id});
     }
     if ($(".vtmb").length == 0) {
         $("#product-thumbnails").find("a").click(function(){
