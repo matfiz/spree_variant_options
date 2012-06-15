@@ -6,7 +6,7 @@ var add_image_handlers = function() {
     var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
     var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
     //swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id},{wmode:"opaque"});
-    jQuery.getMovie("main-image").reloadContent(imgName,imgPath,image_id);
+    jQuery.getMovie("main-image").reloadContent(imgName,imgPath,image_id,$('meta[name="csrf-token"]').attr('content'));
     $("#product-images").data('selectedThumb', $(event.currentTarget).attr('href'));
     $("#product-images").data('selectedThumbId', $(event.currentTarget).parent().attr('id'));
     $(this).mouseout(function() {
@@ -56,7 +56,7 @@ var show_variant_images = function(variant_id) {
     $("#product-images").data('selectedThumbId', thumb.attr('id'));
     var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
     var imgPath = newImg.replace(/\/\w*.\w{3}\?\d*$/,'');
-    $("#main-image").reloadContent(imgName,imgPath,variant_id);
+    $("#main-image").reloadContent(imgName,imgPath,variant_id,$('meta[name="csrf-token"]').attr('content'));
   }
 }
 
@@ -77,7 +77,7 @@ var select_image = function(image_id) {
     var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
     //console.log(imgName,imgPath,image_id);
     if ($.isFunction(jQuery.getMovie("main-image"))) {
-        jQuery.getMovie("main-image").reloadContent(imgName,imgPath,image_id);
+        jQuery.getMovie("main-image").reloadContent(imgName,imgPath,image_id,$('meta[name="csrf-token"]').attr('content'));
     }
   }
 }
