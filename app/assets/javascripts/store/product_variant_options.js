@@ -62,7 +62,7 @@ var show_variant_images = function(variant_id) {
 
 var select_image = function(image_id) {
   var currentThumb = $('#' + $("#main-image").data('selectedThumbId'));
-  var img = $("#tmb-" + image_id)
+  var img = $("#tmb-" + image_id);
   if (img.length > 0 && img != currentThumb)
   {
     var thumb = $(img.eq(0));
@@ -75,8 +75,7 @@ var select_image = function(image_id) {
     //call Zoomer
     var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
     var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
-    //console.log(imgName,imgPath,image_id);
-    if ($.isFunction(jQuery.getMovie("main-image"))) {
+    if (jQuery.getMovie("main-image") != null) {
         jQuery.getMovie("main-image").reloadContent(imgName,imgPath,image_id,$('meta[name="csrf-token"]').attr('content'));
     }
   }
