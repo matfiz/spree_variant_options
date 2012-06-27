@@ -222,8 +222,16 @@ function VariantOptions(params) {
       price = $('#product-price .price').addClass('unselected')
       // Replace product price by "(select)" only when there are at least 1 variant not out-of-stock
       variants = $("div.variant-options.index-0")
-      if (variants.find("a.option-value.out-of-stock").length != variants.find("a.option-value").length)
-        price.text('(wybierz wariant)');
+      if (variants.find("a.option-value.out-of-stock").length != variants.find("a.option-value").length) {
+        console.log(variants.find("a.option-value.out-of-stock").length);
+        console.log(variants.find("a.option-value").length);
+        //price.text('(wybierz wariantyy)');
+      }
+      //if product has no variants
+      if ($("#a.option-value").length == 0) {
+          $('#cart-form button[type=submit]').attr('disabled', false).fadeTo(100, 1);
+          $('#product-price .price').removeClass('unselected');
+      }
     }
   }
 
