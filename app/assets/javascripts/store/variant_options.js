@@ -60,8 +60,8 @@ function VariantOptions(params) {
     if ($('#thumbnails').find('img').length == 0) {
         var orig_path = $('#main-image').find("img").attr("src");
         var imgName = orig_path.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
-        var imgPath = orig_path.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
-        var image_id = orig_path.replace(/\/\w*\/\w*.\w{3}\?\d*$/,'').replace(/\/spree\/products\//,'');
+        var image_id = orig_path.replace(/\/\w*\/\w*.\w{3}\?\d*$/,'').replace(/\/spree\/products\//,'').split("/")[0];
+        var imgPath = orig_path.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'').split(image_id)[0]
         var csrftag = $('meta[name="csrf-token"]').attr('content');
         swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","/assets/swfs//assets/swfs/expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id, csrftag_: csrftag},{wmode:"opaque"});
     }
@@ -71,7 +71,7 @@ function VariantOptions(params) {
         var newImg = init_img.attr('href');
         var image_id = init_img.parent().attr('id').replace(/[^\d]*/,'');
         var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
-        var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
+        var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'').split(image_id)[0]
         var csrftag = $('meta[name="csrf-token"]').attr('content');
         $("#product-images").data('selectedThumb', init_img.attr('href'));
         $("#product-images").data('selectedThumbId', init_img.parent().attr('id'));
@@ -276,7 +276,7 @@ function VariantOptions(params) {
 //if there are no variants, show product image only
 jQuery(document).ready(function(){
     if (window.location.href.match(/\/products\/\w/) != null && ($('#thumbnails').find('img').length == 0 || $(".vtmb").length == 0)) {
-        var orig_path = $('#main-image').find("img").attr("src");
+        var orig_path = $('#main-image').find("img").attr("src");    
         var imgName = orig_path.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
         var imgPath = orig_path.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
         var image_id = orig_path.replace(/\/\w*\/\w*.\w{3}\?\d*$/,'').replace(/\/spree\/products\//,'');

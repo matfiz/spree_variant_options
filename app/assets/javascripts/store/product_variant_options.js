@@ -4,7 +4,7 @@ var add_image_handlers = function() {
     var image_id = $(event.currentTarget).parent().attr('id').replace(/[^\d]*/,'');
     //call Zoomer
     var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
-    var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
+    var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'').split(image_id)[0]
     //swfobject.embedSWF("/assets/swfs/zoomer.swf", "main-image", "552", "460", "11.2.202","expressInstall.swf",{path_:imgPath, img_:imgName, id_:image_id},{wmode:"opaque"});
     jQuery.getMovie("main-image").reloadContent(imgName,imgPath,image_id,$('meta[name="csrf-token"]').attr('content'));
     $("#product-images").data('selectedThumb', $(event.currentTarget).attr('href'));
@@ -55,7 +55,7 @@ var show_variant_images = function(variant_id) {
     $("#product-images").data('selectedThumb', newImg);
     $("#product-images").data('selectedThumbId', thumb.attr('id'));
     var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
-    var imgPath = newImg.replace(/\/\w*.\w{3}\?\d*$/,'');
+    var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'').split(image_id)[0]
     $("#main-image").reloadContent(imgName,imgPath,variant_id,$('meta[name="csrf-token"]').attr('content'));
   }
 }
@@ -74,7 +74,7 @@ var select_image = function(image_id) {
     $("#product-images").data('selectedThumbId', thumb.attr('id'));
     //call Zoomer
     var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
-    var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
+    var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'').split(image_id)[0]
     if (jQuery.getMovie("main-image") != null) {
         jQuery.getMovie("main-image").reloadContent(imgName,imgPath,image_id,$('meta[name="csrf-token"]').attr('content'));
     }
