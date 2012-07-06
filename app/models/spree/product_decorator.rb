@@ -2,6 +2,9 @@ Spree::Product.class_eval do
 
   def option_values
     @_option_values ||= Spree::OptionValue.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }.sort{|a,b| a.presentation<=>b.presentation}
+    kolor = Spree::OptionValue.for_product(self).where("presentation REGEXP 'kolor'").order(:position).sort_by {|ov| ov.option_type.position }
+    rozmiar = Spree::OptionValue.for_product(self).where("presentation REGEXP '[^(kolor)]'").order(:position).sort_by {|ov| ov.option_type.position }
+    @_option_values = kolor + rozmiar
   end
 
   def grouped_option_values
