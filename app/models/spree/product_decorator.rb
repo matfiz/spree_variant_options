@@ -1,10 +1,13 @@
 Spree::Product.class_eval do
 
   def option_values
-    @_option_values ||= Spree::OptionValue.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }.sort{|a,b| a.presentation<=>b.presentation}
-    kolor = Spree::OptionValue.for_product(self).includes(:option_type).where("option_type.presentation REGEXP '(kolor)'").order(:position).sort_by {|ov| ov.option_type.position }
-    rozmiar = Spree::OptionValue.for_product(self).includes(:option_type).where("option_type.presentation NOT REGEXP '(kolor)'").order(:position).sort_by {|ov| ov.option_type.position }
-    @_option_values = kolor + rozmiar
+    #@_option_values ||= Spree::OptionValue.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }.sort{|a,b| a.presentation<=>b.presentation}
+    kolor = self.option_types.where("name REGEXP 'kolor'").first.option_values.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }.sort{|a,b| a.presentation<=>b.presentation}
+    @_option_values = kolor
+    self.option_types.where("name NOT REGEXP 'kolor'").each do |varianty|
+      @_option_values = @_option_values + varianty.option_values.for_product(self).order(:position).sort_by {|ov| ov.option_type.position }.sort{|a,b| a.presentation<=>b.presentation}
+    end
+    @_option_values = @_option_values.flatten
   end
 
   def grouped_option_values
