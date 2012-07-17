@@ -1,3 +1,3 @@
 module SpreeVariantOptions
-  VERSION = "0.5.84"
+  VERSION = "0.5.85"
 end
