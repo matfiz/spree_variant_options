@@ -279,7 +279,7 @@ function VariantOptions(params) {
     });
     $('#cart-form button[type=submit]').attr('disabled', true).stop().animate({"opacity":0.5},"fast");
     if (i==0) {
-      console.log("y="+i);
+      //console.log("y="+i);
       show_all_variant_images();
     };
   }
