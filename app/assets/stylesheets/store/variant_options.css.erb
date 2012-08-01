@@ -34,7 +34,7 @@ li.clear-option a.clear-button {
   display: none;
   font-weight: bold;
   background-color: #fff;
-  border-color: #FDE2E2;
+  border-color: #76a257;
   color: #c00e0e;
 }
 li.clear-option a.clear-button:hover {
@@ -43,27 +43,43 @@ li.clear-option a.clear-button:hover {
   color: #fff;
 }
 .option-value.selected,
-.option-value.in-stock:hover {
-  background-color: #1491EB;
-  border-color: #1072B9;
+.option-value:hover {
+  background-color: #fff;
+  border-color: #76a257;
   color: #fff;
 }
-.option-value.out-of-stock {
-  display: block;
-  background: transparent url(<%= asset_path "store/out-of-stock.png" %>) 0 0 repeat;
-  color: #aaa;
-  cursor: default;
+
+
+
+.option-value.out-of-stock span {
+  color: #bbb;
 }
+
+.option-value.selected span,
+.option-value:hover span{
+  color: #76a257;
+}
+
 .option-value.locked,
 .option-value.locked:hover {
   background-color: #fff;  
-  border-color: #f0f0f0;
-  color: #ddd;
+  border-color: #ccc;
   cursor: default;
 }
+.option-value.locked span,
+.option-value.locked:hover span {  
+  color: #bbb;
+  cursor: default;
+}
+
 .option-value.locked img {
   filter:alpha(opacity=50);
   -moz-opacity:0.5;
   -khtml-opacity: 0.5;
   opacity: 0.5;
+}
+.aviability-image {
+  position: relative;
+  top: 8px;
+  left: 5px;
 }

@@ -9,28 +9,8 @@ var add_image_handlers = function() {
     jQuery.getMovie("main-image").reloadContent(imgName,imgPath,image_id,$('meta[name="csrf-token"]').attr('content'));
     $("#product-images").data('selectedThumb', $(event.currentTarget).attr('href'));
     $("#product-images").data('selectedThumbId', $(event.currentTarget).parent().attr('id'));
-    $(this).mouseout(function() {
-      //$('ul.thumbnails li').removeClass('selected');
-      //$(event.currentTarget).parent('li').addClass('selected');
-    });
+   
     return false;
-  });
-  $('ul.thumbnails').delegate('li', 'mouseenter', function(event) {
-    //var newImg = $(event.currentTarget).find('a').attr('href');
-    //var image_id = $(event.currentTarget).attr('id').replace(/[^\d]*/,'');
-    //call Zoomer
-    //var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
-    //var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
-    //getMovie("main-image").reloadContent(imgName,imgPath,image_id);  
-  });
-  $('ul.thumbnails').delegate('li', 'mouseleave', function(event) {
-    //var newImg = $("#product-images").data('selectedThumb');
-    //var image_id = $("#product-images").data('selectedThumbId').replace(/[^\d]*/,'');
-    //call Zoomer
-    //var imgName = newImg.replace(/\/\w*\/\w*\/\w*\/\w*\//,'');
-    //var imgPath = newImg.replace(/\d*\/\w*\/\w*.\w{3}\?\d*$/,'');
-    //getMovie("main-image").reloadContent(imgName,imgPath,image_id);    
-    //$('#main-image img').attr('src', $("#main-image").data('selectedThumb'));
   });
   
   //open first thumb on init
@@ -82,7 +62,7 @@ var select_image = function(image_id) {
 }
 
 var show_all_variant_images = function() {
-  $('li.vtmb').show();
+  $('li.vtmb').show();  
 }
 
 var show_only_n_variant_images = function(variant,n) {
