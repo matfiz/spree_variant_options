@@ -138,9 +138,9 @@ function VariantOptions(params) {
         disable($(element).addClass('unavailable locked').unbind('click'));
       } else if (keys.length == 1) {
         _var = variants[keys[0]];
-        $(element).addClass((_var.count) ? selection.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
+        $(element).addClass((_var.count || _var.stock) ? selection.length == 1 ? 'in-stock auto-click' : 'in-stock' : 'out-of-stock');
       } else {
-        $.each(variants, function(key, value) { count += value.count });
+        $.each(variants, function(key, value) { count += value.count; stock += value.stock });
         $(element).addClass(count ? 'in-stock' : 'out-of-stock');
       }
     });
@@ -208,7 +208,22 @@ function VariantOptions(params) {
   }
 
   function toggle() {
-   if (variant) {     
+   if (variant) { 
+      if (variant.stock==0 && variant.count > 0){
+        $('.aviability-local-image').attr('src',"/assets/store/0.jpg").attr('alt',"na zamówienie");
+      }
+      if (variant.stock==1){
+        $('.aviability-local-image').attr('src',"/assets/store/1.jpg").attr('alt',"bardzo mało");
+      }
+      if (variant.stock>1 && variant.stock<=5){
+        $('.aviability-local-image').attr('src',"/assets/store/5.jpg").attr('alt',"średnia");
+      }
+      if (variant.stock>5){
+        $('.aviability-local-image').attr('src',"/assets/store/10.jpg").attr('alt',"dużo");
+      }
+      if (variant.stock==0 && variant.count==0){
+        $('.aviability-local-image').attr('src',"/assets/store/brak.jpg").attr('alt',"brak");
+      }
       if (variant.count==0){
         $('.aviability-image').attr('src',"/assets/store/0.jpg").attr('alt',"na zamówienie");
       }
@@ -230,9 +245,9 @@ function VariantOptions(params) {
       if (variant.count==0) {      
           $('#cart-form button[type=submit]').attr('disabled', true).stop().animate({"opacity":0.5},"fast");
       }
-      if (variant.count > 0 || allow_backorders) { 
+      if (variant.count+variant.stock > 0 || allow_backorders) { 
         $('#cart-form button[type=submit]').attr('disabled', false).stop().animate({"opacity":1},"fast"); 
-        if (variant.count ==0){
+        if (variant.stock == 0){
            $('#cart-form button[type=submit]').html("zamów");
          }
          else {

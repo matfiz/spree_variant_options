@@ -12,7 +12,7 @@
             - values.sort_by(&:position).each do |value|
               - classes = ["option-value"]
               - unless (variants = @product.variants_for_option_value(value)).empty?
-                - if variants.sum(&:count_on_hand) > 0
+                - if variants.sum(&:count_on_hand) > 0 || variants.sum(&:count_stock) > 0
                   - classes << "in-stock" 
                 - else
                   - classes << "out-of-stock"
@@ -49,7 +49,7 @@
             - values.sort_by(&:position).each do |value|
               - classes = ["option-value"]
               - unless (variants = @product.variants_for_option_value(value)).empty?
-                - classes << ( variants.sum(&:count_on_hand) > 0 ? "in-stock" : "out-of-stock" ) if index == 0 
+                - classes << ( variants.sum(&:count_on_hand) > 0 || variants.sum(&:count_stock) > 0 ? "in-stock" : "out-of-stock" ) if index == 0 
                 - cl = (value.has_image? ? " " : "noimage")
                 %li{:class => cl}
                   = link_to value.has_image? ? image_tag(value.image.url, :alt => value.presentation) : content_tag(:span, value.presentation), "#", :title => value.presentation, :class => classes.join(" "), :rel => "#{type.id}-#{value.id}"
