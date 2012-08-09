@@ -50,6 +50,8 @@ function VariantOptions(params) {
     toggle();
      if ($('#product-variants .variant-options').length > 0 && $('a.option-value.selected').length == 0) {
           $('#cart-form button[type=submit]').attr('disabled', true).fadeTo(0,0.5);
+          $('.aviability-local-image').css('display','none');
+          $('.aviability-image').css('display','none');
       }
       else{
         //$('#cart-form button[type=submit]').attr('disabled', false).fadeTo(0,1);
@@ -209,8 +211,10 @@ function VariantOptions(params) {
 
   function toggle() {
    if (variant) { 
-      if (variant.stock==0 && variant.count > 0){
-        $('.aviability-local-image').attr('src',"/assets/store/0.jpg").attr('alt',"na zamówienie");
+      $('.aviability-local-image').css('display','inline');
+      $('.aviability-image').css('display','inline');
+      if (variant.stock==0){
+        $('.aviability-local-image').attr('src',"/assets/store/brak.jpg").attr('alt',"brak");
       }
       if (variant.stock==1){
         $('.aviability-local-image').attr('src',"/assets/store/1.jpg").attr('alt',"bardzo mało");
@@ -225,7 +229,7 @@ function VariantOptions(params) {
         $('.aviability-local-image').attr('src',"/assets/store/brak.jpg").attr('alt',"brak");
       }
       if (variant.count==0){
-        $('.aviability-image').attr('src',"/assets/store/0.jpg").attr('alt',"na zamówienie");
+        $('.aviability-image').attr('src',"/assets/store/brak.jpg").attr('alt',"brak");
       }
       if (variant.count==1){
         $('.aviability-image').attr('src',"/assets/store/1.jpg").attr('alt',"bardzo mało");
@@ -244,14 +248,18 @@ function VariantOptions(params) {
       //if ($('#product-variants .variant-options').length > 0 && $('a.option-value.selected').length == 0) {
       if (variant.count==0) {      
           $('#cart-form button[type=submit]').attr('disabled', true).stop().animate({"opacity":0.5},"fast");
+          $('#cart-form button[type=submit]').html("brak");
+          $('.aviability-ask').css("display","inline");
       }
       if (variant.count+variant.stock > 0 || allow_backorders) { 
-        $('#cart-form button[type=submit]').attr('disabled', false).stop().animate({"opacity":1},"fast"); 
+        $('#cart-form button[type=submit]').attr('disabled', false).stop().animate({"opacity":1},"fast");
+        $('.aviability-ask').css("display","none");
+         
         if (variant.stock == 0){
-           $('#cart-form button[type=submit]').html("zamów");
+           $('#cart-form button[type=submit]').html("kup teraz");
          }
          else {
-           $('#cart-form button[type=submit]').html("kupuj");
+           $('#cart-form button[type=submit]').html("kup teraz");
          }  
       } 
       //$('form[data-form-type="variant"] button[type=submit]').attr('disabled', false).fadeTo(100, 1);
@@ -293,6 +301,9 @@ function VariantOptions(params) {
       $(element).find('a.clear-button').hide();
     });
     $('#cart-form button[type=submit]').attr('disabled', true).stop().animate({"opacity":0.5},"fast");
+    $('.aviability-local-image').css('display','none');
+    $('.aviability-image').css('display','none');
+    $('.aviability-ask').css("display","none");
     if (i==0) {
       //console.log("y="+i);
       show_all_variant_images();
